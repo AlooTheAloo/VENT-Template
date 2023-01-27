@@ -1,0 +1,103 @@
+{
+  "name": "template",
+  "productName": "template",
+  "version": "7.2.7",
+  "description": "My Electron application description",
+  "main": ".webpack/main",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\"",
+    "restart": "pkill electron -9; npm start"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Philip Anthony-Davis",
+    "email": "philip29313@hotmail.com"
+  },
+  "license": "MIT",
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "VENT-Template"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ],
+      "plugins": [
+        {
+          "name": "@electron-forge/plugin-webpack",
+          "config": {
+            "devServer": {
+              "liveReload": false
+            },
+            "devContentSecurityPolicy": "",
+            "mainConfig": "./webpack.main.config.js",
+            "renderer": {
+              "config": "./webpack.renderer.config.js",
+              "entryPoints": [
+                {
+                  "html": "./src/public/pages/MainPage.html",
+                  "js": "./src/public/js/MainPage.ts",
+                  "name": "main_page",
+                  "preload": {
+                    "js": "./src/preload.ts"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "css-loader": "^6.7.1",
+    "electron-prompt": "^1.7.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "source-map-support": "^0.5.21",
+    "typescript": "^4.8.3",
+    "vue": "^3.2.39"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.64",
+    "@electron-forge/maker-deb": "^6.0.0-beta.64",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.64",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.64",
+    "@electron-forge/maker-zip": "^6.0.0-beta.64",
+    "@electron-forge/plugin-webpack": "6.0.0-beta.64",
+    "copy-webpack-plugin": "^11.0.0",
+    "electron": "20.0.3",
+    "electron-devtools-installer": "^3.2.0",
+    "extract-loader": "^5.1.0",
+    "fork-ts-checker-webpack-plugin": "^7.2.13",
+    "node-loader": "^2.0.0",
+    "prettier": "^2.7.1",
+    "ref-loader": "^1.0.3",
+    "speed-measure-webpack-plugin": "^1.5.0",
+    "ts-loader": "^9.3.1",
+    "vue-loader": "^17.0.0",
+    "vue-style-loader": "^4.1.3",
+    "vue-tsc": "^0.40.13",
+    "webpack-merge": "^5.8.0"
+  }
+}
